@@ -1,0 +1,51 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# deformula
+
+Integration of One-Dimensional Functions with Double Exponential Formulas
+
+## Installation
+
+You can install the released version of deformula from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("deformula")
+```
+
+## Description
+
+The double exponential formula has benn proposed by the following:
+- H. Takahasi and M. Mori, Double Exponential Formulas for Numerical Integration, Publications of RIMS, Kyoto University, vol. 9 (1974), pg. 721–741.
+which is known as the high precision quadrature. The double exponential formula is also called tanh_sinh, sinh_sinh and exp_sinh quadrature such as in Boost C++.
+
+This package only implements tanh_sinh for a finite interval [lower, upper] and exp_sinh for $[0, \infty$.
+
+## Example
+
+The example shows the integral of the function $y = e^{-a x}$ on $[0, \infty$:
+
+```{r example1}
+library(deformula)
+f <- function(x, a) exp(-a*x)
+deformula.zeroinf(f, a=0.1)
+```
+
+The example shows the integral of the function $y = e^{-a x}$ on $[0, 1]$:
+
+```{r example2}
+f <- function(x, a) exp(-a*x)
+deformula.moneone(f, 0, 1, a=0.1)
+```
+
