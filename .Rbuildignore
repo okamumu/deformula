@@ -6,3 +6,4 @@
 ^deformula.*\.tar\.gz$
 ^deformula.*\.tgz$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$

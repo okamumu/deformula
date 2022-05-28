@@ -5,7 +5,7 @@ Version: 0.1.2
 Authors@R: person("Hiroyuki", "Okamura", email = "okamu@hiroshima-u.ac.jp", role = c("aut", "cre"))
 Description: Numerical quadrature of functions of one variable over a finite
   or infinite interval with double exponential formulas.
-URL: http://github.com/okamumu/deformula/
+URL: https://github.com/okamumu/deformula/
 BugReports: https://github.com/okamumu/deformula/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
