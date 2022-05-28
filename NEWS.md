@@ -1,6 +1,6 @@
-# deformula 1.0.0
+# deformula 0.1.2
 
-* Release
 * The package is refactored with Roxygen and devtools.
+* License has been changed.
 
 

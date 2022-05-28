@@ -2,3 +2,7 @@
 ^LICENSE\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^deformula\.Rcheck$
+^deformula.*\.tar\.gz$
+^deformula.*\.tgz$
+^cran-comments\.md$
