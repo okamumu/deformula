@@ -17,20 +17,26 @@ install.packages("deformula")
 
 ## Description
 
-The double exponential formula has benn proposed by the following: - H.
-Takahasi and M. Mori, Double Exponential Formulas for Numerical
-Integration, Publications of RIMS, Kyoto University, vol. 9 (1974), pg.
-721–741. which is known as the high precision quadrature. The double
-exponential formula is also called tanh\_sinh, sinh\_sinh and exp\_sinh
-quadrature such as in Boost C++.
+The double exponential formula has been proposed by the following:
 
-This package only implements tanh\_sinh for a finite interval \[lower,
-upper\] and exp\_sinh for \([0, \infty\).
+-   H. Takahasi and M. Mori, Double Exponential Formulas for Numerical
+    Integration, Publications of RIMS, Kyoto University, vol. 9 (1974),
+    pg. 721–741.
+
+which is known as the high precision quadrature. The double exponential
+formula is also called tanh_sinh, sinh_sinh and exp_sinh quadrature such
+as in Boost C++.
+
+This package only implements tanh_sinh for a finite interval \[lower,
+upper\] and exp_sinh for
+![\[0, \\infty](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5B0%2C%20%5Cinfty "[0, \infty").
 
 ## Example
 
-The example shows the integral of the function \(y = e^{-a x}\) on
-\([0, \infty\):
+The example shows the integral of the function
+![y = e^{-a x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;y%20%3D%20e%5E%7B-a%20x%7D "y = e^{-a x}")
+on
+![\[0, \\infty)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5B0%2C%20%5Cinfty%29 "[0, \infty)"):
 
 ``` r
 library(deformula)
@@ -181,8 +187,10 @@ deformula.zeroinf(f, a=0.1)
 #> [1] "OK"
 ```
 
-The example shows the integral of the function \(y = e^{-a x}\) on
-\([0, 1]\):
+The example shows the integral of the function
+![y = e^{-a x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;y%20%3D%20e%5E%7B-a%20x%7D "y = e^{-a x}")
+on
+![\[0, 1\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5B0%2C%201%5D "[0, 1]"):
 
 ``` r
 f <- function(x, a) exp(-a*x)
@@ -209,10 +217,10 @@ deformula.moneone(f, 0, 1, a=0.1)
 #> [31] 1.140835e-10
 #> 
 #> $t
-#>  [1] -2.8125 -2.6250 -2.4375 -2.2500 -2.0625 -1.8750 -1.6875 -1.5000
-#>  [9] -1.3125 -1.1250 -0.9375 -0.7500 -0.5625 -0.3750 -0.1875  0.0000
-#> [17]  0.1875  0.3750  0.5625  0.7500  0.9375  1.1250  1.3125  1.5000
-#> [25]  1.6875  1.8750  2.0625  2.2500  2.4375  2.6250  2.8125
+#>  [1] -2.8125 -2.6250 -2.4375 -2.2500 -2.0625 -1.8750 -1.6875 -1.5000 -1.3125
+#> [10] -1.1250 -0.9375 -0.7500 -0.5625 -0.3750 -0.1875  0.0000  0.1875  0.3750
+#> [19]  0.5625  0.7500  0.9375  1.1250  1.3125  1.5000  1.6875  1.8750  2.0625
+#> [28]  2.2500  2.4375  2.6250  2.8125
 #> 
 #> $h
 #> [1] 0.1875

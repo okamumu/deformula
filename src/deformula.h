@@ -2,8 +2,7 @@
  Double exponential formula
  */
 
-#include <R.h>
-#include <Rinternals.h>
+#include <Rcpp.h>
 
 #include <vector>
 #include <cfloat>
@@ -128,9 +127,10 @@ protected:
 template <class FUNCTION>
 void Deformula::calcWeight(double t, FUNCTION& func) {
   double xtmp = phi(t);
-  double wtmp = phidash(t) * func(xtmp);
-  if (!ISNAN(wtmp) && wtmp > m_zero) {
-    if (!R_FINITE(wtmp)) {
+  double y = Rcpp::as<double>(func(Rcpp::wrap(xtmp)));
+  double wtmp = phidash(t) * y;
+  if (!std::isnan(wtmp) && wtmp > m_zero) {
+    if (!std::isfinite(wtmp)) {
       m_info = 2;
       return;
     }

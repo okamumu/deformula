@@ -2,7 +2,8 @@ Package: deformula
 Type: Package
 Title: Integration of One-Dimensional Functions with Double Exponential Formulas
 Version: 0.1.2
-Authors@R: person("Hiroyuki", "Okamura", email = "okamu@hiroshima-u.ac.jp", role = c("aut", "cre"))
+Authors@R: person("Hiroyuki", "Okamura", email = "okamu@hiroshima-u.ac.jp",
+  role = c("aut", "cre"), comment = c(ORCID = "0000-0001-6881-0593"))
 Description: Numerical quadrature of functions of one variable over a finite
   or infinite interval with double exponential formulas.
 URL: https://github.com/okamumu/deformula/
@@ -10,4 +11,11 @@ BugReports: https://github.com/okamumu/deformula/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.2.0
+LinkingTo: 
+    Rcpp
+Imports: 
+    Rcpp
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

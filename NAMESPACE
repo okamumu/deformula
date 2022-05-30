@@ -2,4 +2,5 @@
 
 export(deformula.moneone)
 export(deformula.zeroinf)
+importFrom(Rcpp,sourceCpp)
 useDynLib(deformula, .registration = TRUE)

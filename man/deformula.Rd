@@ -12,12 +12,12 @@ or infinite interval with double exponential formulas.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://github.com/okamumu/deformula/}
+  \item \url{https://github.com/okamumu/deformula/}
   \item Report bugs at \url{https://github.com/okamumu/deformula/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Hiroyuki Okamura \email{okamu@hiroshima-u.ac.jp}
+\strong{Maintainer}: Hiroyuki Okamura \email{okamu@hiroshima-u.ac.jp} (\href{https://orcid.org/0000-0001-6881-0593}{ORCID})
 
 }

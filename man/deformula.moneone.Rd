@@ -5,8 +5,16 @@
 \title{Integration of one-dimensional functions over finite interval
 with the double exponential formula.}
 \usage{
-deformula.moneone(f, lower, upper, ..., zero.eps = 1e-12,
-  rel.tol = 1e-08, start.divisions = 8, max.iter = 12)
+deformula.moneone(
+  f,
+  lower,
+  upper,
+  ...,
+  zero.eps = 1e-12,
+  rel.tol = 1e-08,
+  start.divisions = 8,
+  max.iter = 12
+)
 }
 \arguments{
 \item{f}{An R function taking a numeric first argument.}

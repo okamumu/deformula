@@ -6,5 +6,6 @@
 #' @docType package
 #' @name deformula
 #' @useDynLib deformula, .registration = TRUE
+#' @importFrom Rcpp sourceCpp
 "_PACKAGE"
 

@@ -26,15 +26,17 @@ install.packages("deformula")
 
 ## Description
 
-The double exponential formula has benn proposed by the following:
+The double exponential formula has been proposed by the following:
+
 - H. Takahasi and M. Mori, Double Exponential Formulas for Numerical Integration, Publications of RIMS, Kyoto University, vol. 9 (1974), pg. 721–741.
+
 which is known as the high precision quadrature. The double exponential formula is also called tanh_sinh, sinh_sinh and exp_sinh quadrature such as in Boost C++.
 
 This package only implements tanh_sinh for a finite interval [lower, upper] and exp_sinh for $[0, \infty$.
 
 ## Example
 
-The example shows the integral of the function $y = e^{-a x}$ on $[0, \infty$:
+The example shows the integral of the function $y = e^{-a x}$ on $[0, \infty)$:
 
 ```{r example1}
 library(deformula)
