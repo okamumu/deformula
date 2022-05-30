@@ -9,6 +9,8 @@
 #include <cmath>
 #include <algorithm>
 
+// [[Rcpp::plugins("cpp11")]]
+
 namespace deformula {
 
 const static int kStartd = 8;
