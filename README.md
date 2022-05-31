@@ -3,6 +3,13 @@
 
 # deformula
 
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/okamumu/deformula/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/okamumu/deformula/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/deformula)](https://CRAN.R-project.org/package=deformula)
+<!-- badges: end -->
+
 Integration of One-Dimensional Functions with Double Exponential
 Formulas
 
