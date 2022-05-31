@@ -7,3 +7,5 @@
 ^deformula.*\.tgz$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+^\.github$
+^codecov\.yml$
