@@ -41,15 +41,30 @@ mac:
 # "Optional comment", then records CRAN-SUBMISSION. CRAN still mails a
 # confirmation link that a human has to click.
 #
-# Needs a tty: submit_cran() guards itself with utils::menu(), which returns 0
-# when R is not interactive -- the submission would abort without saying so.
+# Open an interactive R session in the package, from which
+# devtools::submit_cran() uploads the tarball with cran-comments.md as the
+# submission comment and writes CRAN-SUBMISSION.
+#
+# The call is not run automatically: submit_cran() confirms through
+# utils::menu(), which reads the terminal, so it cannot be passed with -e
+# ("R -e" feeds the expression through stdin, leaving menu() nothing to read;
+# "R --interactive -e" ignores the expression). Running it from .Rprofile or
+# .First does not work either -- utils is not attached that early.
 submit:
+	@echo ''
+	@echo '  In the R session that opens, type:'
+	@echo ''
+	@echo '      devtools::submit_cran()'
+	@echo ''
+	@echo '  Answer the two confirmations, then click the link CRAN mails you.'
+	@echo '  q() leaves without submitting.'
+	@echo ''
 	docker run --rm -it \
 		-v "$(CURDIR)":/pkg \
 		-w /pkg \
 		-u $(shell id -u):$(shell id -g) \
 		-e HOME=/tmp \
-		$(IMAGE) R --quiet --interactive -e 'devtools::submit_cran()'
+		$(IMAGE) R --quiet --no-save
 
 readme:
 	$(DOCKER_RUN) Rscript -e 'devtools::build_readme()'
