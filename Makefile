@@ -14,7 +14,7 @@ DOCKER_RUN := docker run --rm \
 	-e HOME=/tmp \
 	$(IMAGE)
 
-.PHONY: image document test check win mac readme shell clean
+.PHONY: image document test check win mac submit readme shell clean
 
 image:
 	docker build -t $(IMAGE) .
@@ -36,6 +36,20 @@ win:
 
 mac:
 	$(DOCKER_RUN) Rscript -e 'devtools::check_mac_release()'
+
+# Submit to CRAN. Uploads the tarball together with cran-comments.md as the
+# "Optional comment", then records CRAN-SUBMISSION. CRAN still mails a
+# confirmation link that a human has to click.
+#
+# Needs a tty: submit_cran() guards itself with utils::menu(), which returns 0
+# when R is not interactive -- the submission would abort without saying so.
+submit:
+	docker run --rm -it \
+		-v "$(CURDIR)":/pkg \
+		-w /pkg \
+		-u $(shell id -u):$(shell id -g) \
+		-e HOME=/tmp \
+		$(IMAGE) R --quiet --interactive -e 'devtools::submit_cran()'
 
 readme:
 	$(DOCKER_RUN) Rscript -e 'devtools::build_readme()'

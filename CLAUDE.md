@@ -43,6 +43,12 @@ R -q -e 'devtools::build_readme()'                          # README.md is gener
 before a CRAN release; both mail their results to the Maintainer address in `DESCRIPTION`
 rather than printing anything useful.
 
+`make submit` runs `devtools::submit_cran()`, which uploads the tarball with
+`cran-comments.md` as the submission comment and writes `CRAN-SUBMISSION`. It runs the
+container with a tty on purpose: `submit_cran()` guards itself with `utils::menu()`, which
+returns 0 in a non-interactive session, so the submission would abort silently. CRAN then
+mails a confirmation link that a human has to click.
+
 CI (`.github/workflows`) does not use the Docker image; it installs R directly via
 `r-lib/actions`. `R-CMD-check` runs a five-way matrix — ubuntu r-devel / r-release /
 r-oldrel-1, macOS, Windows — and `test-coverage` reports to codecov. **The r-devel job
