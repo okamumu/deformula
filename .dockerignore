@@ -1,0 +1,8 @@
+.git
+.Rproj.user
+deformula.Rcheck/
+deformula*.tar.gz
+deformula*.tgz
+src/*.o
+src/*.so
+src/*.dll

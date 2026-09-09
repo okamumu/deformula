@@ -17,7 +17,7 @@ deformula.zeroinf(
 \arguments{
 \item{f}{An R function taking a numeric first argument.}
 
-\item{...}{Additional arguments to be passed to ‘f’.}
+\item{...}{Additional arguments to be passed to 'f'.}
 
 \item{zero.eps}{A threshold value to be zero.}
 

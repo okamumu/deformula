@@ -9,3 +9,7 @@
 ^CRAN-SUBMISSION$
 ^\.github$
 ^codecov\.yml$
+^Dockerfile$
+^Makefile$
+^\.dockerignore$
+^CLAUDE\.md$

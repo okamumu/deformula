@@ -9,7 +9,6 @@
 #include <cmath>
 #include <algorithm>
 
-// [[Rcpp::plugins("cpp11")]]
 
 namespace deformula {
 
@@ -131,11 +130,20 @@ void Deformula::calcWeight(double t, FUNCTION& func) {
   double xtmp = phi(t);
   double y = Rcpp::as<double>(func(Rcpp::wrap(xtmp)));
   double wtmp = phidash(t) * y;
-  if (!std::isnan(wtmp) && wtmp > m_zero) {
-    if (!std::isfinite(wtmp)) {
-      m_info = 2;
-      return;
-    }
+  // NaN is expected at both ends of the exp_sinh transform, where phidash
+  // overflows to infinity while the integrand has already underflowed to
+  // zero. Such a node contributes nothing and is simply dropped.
+  if (std::isnan(wtmp)) {
+    return;
+  }
+  if (!std::isfinite(wtmp)) {
+    m_info = 2;
+    return;
+  }
+  // Drop the nodes whose contribution is negligible; the double exponential
+  // transform makes |w| decay to zero at both ends. The comparison must be
+  // on the magnitude, otherwise every negative contribution is discarded.
+  if (std::abs(wtmp) > m_zero) {
     m_data.push_back(DeformulaElement(t, xtmp, wtmp));
   }
 }
@@ -161,6 +169,10 @@ void Deformula::getWeight(FUNCTION& func, double zero, double reltol, int startd
   int i, d;
   double v, prev;
 
+  m_info = 0;
+  m_aerror = 0.0;
+  m_rerror = 0.0;
+
   // 1st iteration
   m_iter = 1;
   d = m_dstart;
@@ -172,8 +184,7 @@ void Deformula::getWeight(FUNCTION& func, double zero, double reltol, int startd
   calcWeight(t.begin(), t.end(), func);
   m_sum = sumw() * m_h;
 
-  m_info = 0;
-  while(1) {
+  while (m_info == 0) {
     m_iter++;
     prev = m_sum;
 
@@ -194,16 +205,18 @@ void Deformula::getWeight(FUNCTION& func, double zero, double reltol, int startd
     std::vector<double>::iterator bb = t.begin();
     calcWeight(bb+dsize, t.end(), func);
     //			calcWeight(std::next(t.begin(), dsize), t.end(), func);
+    if (m_info != 0) {
+      break;
+    }
     m_sum = sumw() * m_h;
 
     m_aerror = m_sum - prev;
-    m_rerror = m_aerror / prev;
-    if (std::abs(m_rerror) < m_reltol) {
-      m_info = 0;
-      break;
-    }
-
-    if (m_info == 2) {
+    m_rerror = (prev != 0.0) ? m_aerror / prev : m_aerror;
+    // Test the relative error against the current sum, with an absolute
+    // floor so that an integral of (nearly) zero also converges instead of
+    // running until maxiter.
+    if (std::abs(m_aerror) < m_reltol * std::abs(m_sum) ||
+        std::abs(m_aerror) < m_zero) {
       break;
     }
   }
@@ -257,7 +270,7 @@ double Deformula::sumw() const {
 }
 
 int Deformula::getSize() const {
-  return m_data.size();
+  return static_cast<int>(m_data.size());
 }
 
 std::vector<double> Deformula::getTValue() const {

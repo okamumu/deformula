@@ -5,7 +5,7 @@
 #' [0, infinity) with the double exponential formula.
 #'
 #' @param f An R function taking a numeric first argument.
-#' @param ... Additional arguments to be passed to ‘f’.
+#' @param ... Additional arguments to be passed to 'f'.
 #' @param zero.eps A threshold value to be zero.
 #' @param rel.tol A relative accuracy requested.
 #' @param start.divisions An integer. The initial number of subintervals.
@@ -28,15 +28,9 @@ deformula.zeroinf <- function(f, ..., zero.eps = 1.0e-12,
 	ff <- function(x) f(x, ...)
 	res <- integrate_zero_to_inf(ff, zero.eps, rel.tol,
 	                             start.divisions, max.iter)
-	# names(res) <- c("value", "x", "w", "t", "h", "message")
-    switch(as.character(res$message),
-		"0"={res$message <- "OK"},
-		"2"={res$message <- "Error: Some values become NaN."},
-        stop("Unknown error code.")
-    )
+	res$message <- deformula.message(res$message)
 	res
 }
-
 #' Integration of one-dimensional functions over finite interval
 #' with the double exponential formula.
 #'
@@ -46,7 +40,7 @@ deformula.zeroinf <- function(f, ..., zero.eps = 1.0e-12,
 #' @param f An R function taking a numeric first argument.
 #' @param lower The lower limit of integration.
 #' @param upper The upper limit of integration.
-#' @param ... Additional arguments to be passed to ‘f’.
+#' @param ... Additional arguments to be passed to 'f'.
 #' @param zero.eps A threshold value to be zero.
 #' @param rel.tol A relative accuracy requested.
 #' @param start.divisions An integer. The initial number of subintervals.
@@ -73,10 +67,16 @@ deformula.moneone <- function(f, lower, upper, ..., zero.eps = 1.0e-12,
 	                             start.divisions, max.iter)
 	# names(res) <- c("value", "x", "w", "t", "h", "message")
 	res$x <- ((upper - lower) * res$x + (upper + lower)) / 2.0
-    switch(as.character(res$message),
-		"0"={res$message <- "OK"},
-		"2"={res$message <- "Error: Some values become NaN"},
-        stop("Unknown error code.")
-    )
+	res$message <- deformula.message(res$message)
 	res
+}
+
+# Translate the info code returned by the C++ code into a message string.
+deformula.message <- function(info) {
+	switch(as.character(info),
+		"0" = "OK",
+		"1" = "Warning: The maximum number of iterations was reached.",
+		"2" = "Error: Some values become infinite.",
+		stop("Unknown error code.")
+	)
 }

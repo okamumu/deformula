@@ -23,7 +23,7 @@ deformula.moneone(
 
 \item{upper}{The upper limit of integration.}
 
-\item{...}{Additional arguments to be passed to ‘f’.}
+\item{...}{Additional arguments to be passed to 'f'.}
 
 \item{zero.eps}{A threshold value to be zero.}
 

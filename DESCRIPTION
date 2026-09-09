@@ -1,7 +1,7 @@
 Package: deformula
 Type: Package
 Title: Integration of One-Dimensional Functions with Double Exponential Formulas
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: person("Hiroyuki", "Okamura", email = "okamu@hiroshima-u.ac.jp",
   role = c("aut", "cre"), comment = c(ORCID = "0000-0001-6881-0593"))
 Description: Numerical quadrature of functions of one variable over a finite
@@ -11,9 +11,8 @@ BugReports: https://github.com/okamumu/deformula/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.3.3
 LinkingTo: 
-    cpp11,
     Rcpp
 Imports: 
     Rcpp
@@ -21,4 +20,3 @@ Suggests:
     covr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-SystemRequirements: C++11
