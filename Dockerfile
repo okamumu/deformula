@@ -10,7 +10,10 @@ FROM rocker/r-ver:4.5.1
 
 # System libraries required to build devtools and its dependencies.
 # qpdf and pandoc are required by "R CMD check --as-cran".
+# git is needed by devtools::submit_cran(), which records the submitted commit
+# in CRAN-SUBMISSION via "git rev-parse HEAD".
 RUN apt-get update && apt-get install -y --no-install-recommends \
+        git \
         libcurl4-openssl-dev \
         libssl-dev \
         libxml2-dev \
